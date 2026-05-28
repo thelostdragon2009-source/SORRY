@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I'm Sorry 💔</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* --- RESET & VARIABLES --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --primary: #ff6b6b;
+            --secondary: #ff9e9e;
+        }
+
+        body {
+            font-family: 'Fredoka', sans-serif;
+            background: linear-gradient(180deg, #fff0f3 0%, #ffe3e3 100%);
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #4a4a4a;
+        }
+
+        /* --- BACKGROUND FLOATING ELEMENTS --- */
+        .bg-elements {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .float-item {
+            position: absolute;
+            font-size: 2rem;
+            animation: floatUp linear infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes floatUp {
+            from { transform: translateY(110vh) rotate(0deg); opacity: 0.8; }
+            to { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* --- CARD CONTAINER --- */
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 420px;
+            width: 90%;
+            position: relative;
+            z-index: 10;
+            min-height: 520px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 4px solid white;
+        }
+
+        /* --- MEDIA CONTAINERS --- */
+        .media-container {
+            width: 220px;
+            height: 220px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Large Emoji Style */
+        .large-emoji {
+            font-size: 110px;
+            display: block;
+            filter: drop-shadow(0 10px 10px rgba(0,0,0,0.1));
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 1.8rem;
+        }
+        
+        .script-font {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: #d63384;
+        }
+
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .quote {
+            font-style: italic;
+            color: #d63384;
+            font-size: 1rem;
+            margin-top: 15px;
+        }
+
+        /* --- BUTTONS --- */
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        .btn:hover { transform: scale(1.05); }
+
+        .btn-group {
+            position: relative;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            width: 100%;
+            height: 60px;
+        }
+
+        .btn-no {
+            background: #e0e0e0;
+            color: #555;
+            box-shadow: none;
+            position: absolute;
+            right: 20px;
+        }
+        
+        .btn-yes { position: absolute; left: 20px; }
+
+        /* --- ANIMATIONS --- */
+        .hidden { display: none !important; }
+        .fade-in { animation: fadeIn 0.8s ease forwards; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Pulse for sad emoji */
+        .pulse { animation: pulse 1.5s infinite; }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Bounce for happy ending */
+        .bounce { animation: bounce 0.8s infinite; }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-elements" id="bg-container"></div>
+
+    <!-- PAGE 1: The Realization -->
+    <div class="card fade-in" id="page1">
+        <div class="media-container">
+            <span class="large-emoji pulse">😔</span>
+        </div>
+        <h1>I messed up... 💔</h1>
+        <p>I know I hurt you, and I hate that I did. You deserved so much better from me.</p>
+        <button class="btn" onclick="nextPage(2)">Continue</button>
+    </div>
+
+    <!-- PAGE 2: The Apology -->
+    <div class="card hidden" id="page2">
+        <div class="media-container">
+            <span class="large-emoji">🥺</span>
+        </div>
+        <h1>I'm truly sorry</h1>
+        <p>What I did was wrong, and I take full responsibility. I should have treated you better, and I regret every moment I caused you pain.</p>
+        <p class="quote">"I can't change the past, but I promise to be better."</p>
+        <button class="btn" onclick="nextPage(3)">Continue</button>
+    </div>
+
+    <!-- PAGE 3: The Truth -->
+    <div class="card hidden" id="page3">
+        <div class="media-container">
+            <span class="large-emoji">💭</span>
+        </div>
+        <h1>The truth is...</h1>
+        <p>You mean everything to me. When I see you sad, it breaks my heart. I never want to hurt you again, and I'll do whatever it takes to make this right.</p>
+        <button class="btn" onclick="nextPage(4)">Continue</button>
+    </div>
+
+    <!-- PAGE 4: The Promise -->
+    <div class="card hidden" id="page4">
+        <div class="media-container">
+            <span class="large-emoji">🤝</span>
+        </div>
+        <h1>I promise you</h1>
+        <p>I promise to listen when you speak, to respect your feelings, and to never take you for granted. You deserve to be loved and cherished, and I want to be the one who does that.</p>
+        <button class="btn" onclick="nextPage(5)">Continue</button>
+    </div>
+
+    <!-- PAGE 5: The Final Ask -->
+    <div class="card hidden" id="page5">
+        <div class="media-container">
+            <span class="large-emoji">🙏</span>
+        </div>
+        <h1>Can you forgive me?</h1>
+        <p>I know trust takes time to rebuild, and I'm willing to put in the effort. Please give me a chance to show you that I'm sorry and that I can be better.</p>
+        
+        <div class="btn-group">
+            <button class="btn btn-yes" onclick="nextPage(6)">I forgive you 💕</button>
+            <button class="btn btn-no" id="noBtn" onmouseover="dodge()" onclick="dodge()">No</button>
+        </div>
+    </div>
+
+    <!-- PAGE 6: Celebration -->
+    <div class="card hidden" id="page6">
+        <div class="media-container">
+            <span class="large-emoji bounce">🥰</span>
+        </div>
+        <h1 class="script-font" style="font-size: 2.8rem;">Thank You 💞</h1>
+        <p>I promise to cherish your love and never let you down again. You're my everything, and I'm so grateful you gave me this chance.</p>
+        <h2 style="color: #ff6b6b; font-size: 1.4rem;">I love you so much 💕</h2>
+    </div>
+
+    <script>
+        function nextPage(num) {
+            document.querySelectorAll('.card').forEach(c => c.classList.add('hidden'));
+            const current = document.getElementById(`page${num}`);
+            current.classList.remove('hidden');
+            current.classList.add('fade-in');
+            if(num === 6) startHearts();
+        }
+
+        function dodge() {
+            const btn = document.getElementById('noBtn');
+            const newX = Math.random() * (window.innerWidth - 100);
+            const newY = Math.random() * (window.innerHeight - 50);
+            btn.style.position = 'fixed';
+            btn.style.left = newX + 'px';
+            btn.style.top = newY + 'px';
+        }
+
+        function createFloatingElements() {
+            const container = document.getElementById('bg-container');
+            const items = ['💔', '💕', '🌹', '💌', '💖', '✨'];
+            setInterval(() => {
+                const el = document.createElement('div');
+                el.classList.add('float-item');
+                el.innerText = items[Math.floor(Math.random() * items.length)];
+                el.style.left = Math.random() * 100 + 'vw';
+                el.style.animationDuration = Math.random() * 5 + 5 + 's';
+                el.style.fontSize = Math.random() * 20 + 20 + 'px';
+                container.appendChild(el);
+                setTimeout(() => el.remove(), 10000);
+            }, 400);
+        }
+
+        function startHearts() {
+            for(let i=0; i<40; i++) {
+                const heart = document.createElement('div');
+                heart.style.position = 'fixed';
+                heart.style.left = '50%';
+                heart.style.top = '50%';
+                heart.style.width = '20px';
+                heart.style.height = '20px';
+                heart.style.fontSize = '20px';
+                heart.innerText = '💕';
+                heart.style.zIndex = '1000';
+                
+                const angle = Math.random() * Math.PI * 2;
+                const distance = Math.random() * 350;
+                const x = Math.cos(angle) * distance;
+                const y = Math.sin(angle) * distance;
+
+                document.body.appendChild(heart);
+
+                heart.animate([
+                    { transform: 'translate(0,0) scale(1)', opacity: 1 },
+                    { transform: `translate(${x}px, ${y}px) scale(0)`, opacity: 0 }
+                ], {
+                    duration: 1200,
+                    easing: 'ease-out'
+                }).onfinish = () => heart.remove();
+            }
+        }
+
+        createFloatingElements();
+    </script>
+</body>
+      </html>
+      
